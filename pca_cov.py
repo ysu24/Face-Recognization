@@ -1,8 +1,6 @@
 '''pca_cov.py
 Performs principal component analysis using the covariance matrix approach
 Yiheng Su
-CS 252 Data Analysis Visualization
-Spring 2022
 '''
 
 import numpy as np
@@ -22,8 +20,6 @@ class PCA_COV:
         -----------
         data: pandas DataFrame. shape=(num_samps, num_vars)
             Contains all the data samples and variables in a dataset.
-
-        (No changes should be needed)
         '''
         self.data = data
 
@@ -62,19 +58,15 @@ class PCA_COV:
         self.normalized_info = None
 
     def get_prop_var(self):
-        '''(No changes should be needed)'''
         return self.prop_var
 
     def get_cum_var(self):
-        '''(No changes should be needed)'''
         return self.cum_var
 
     def get_eigenvalues(self):
-        '''(No changes should be needed)'''
         return self.e_vals
 
     def get_eigenvectors(self):
-        '''(No changes should be needed)'''
         return self.e_vecs
 
     def covariance_matrix(self, data):
@@ -146,18 +138,6 @@ class PCA_COV:
             Variable names must match those used in the `self.data` DataFrame.
         normalize: boolean.
             If True, normalize each data variable so that the values range from 0 to 1.
-
-        NOTE: Leverage other methods in this class as much as possible to do computations.
-
-        TODO:
-        - Select the relevant data (corresponding to `vars`) from the data pandas DataFrame
-        then convert to numpy ndarray for forthcoming calculations.
-        - If `normalize` is True, normalize the selected data so that each variable (column)
-        ranges from 0 to 1 (i.e. normalize based on the dynamic range of each variable).
-            - Before normalizing, create instance variables containing information that would be
-            needed to "undo" or reverse the normalization on the selected data.
-        - Make sure to compute everything needed to set all instance variables defined in constructor,
-        except for self.A_proj (this will happen later).
         '''
         self.vars = vars
         self.A = np.array(self.data[vars])
@@ -200,10 +180,6 @@ class PCA_COV:
         -----------
         num_pcs_to_keep: int. Show the variance accounted for by this many top PCs.
             If num_pcs_to_keep is None, show variance accounted for by ALL the PCs (the default).
-
-        NOTE: Make plot markers at each point. Enlarge them so that they look obvious.
-        NOTE: Reminder to create useful x and y axis labels.
-        NOTE: Don't write plt.show() in this method
         '''
         if num_pcs_to_keep is None:
             var=self.cum_var
@@ -230,18 +206,12 @@ class PCA_COV:
         -----------
         pcs_to_keep: Python list of ints. len(pcs_to_keep) = num_pcs_to_keep
             Project the data onto these PCs.
-            NOTE: This LIST contains indices of PCs to project the data onto, they are NOT necessarily
-            contiguous.
-            Example 1: [0, 2] would mean project on the 1st and 3rd largest PCs.
-            Example 2: [0, 1] would mean project on the two largest PCs.
 
         Returns
         -----------
         pca_proj: ndarray. shape=(num_samps, num_pcs_to_keep).
             e.g. if pcs_to_keep = [0, 1],
             then pca_proj[:, 0] are x values, pca_proj[:, 1] are y values.
-
-        NOTE: This method should set the variable `self.A_proj`
         '''
         proj_vecs = self.e_vecs[:,pcs_to_keep]
         self.A_proj = self.A @ proj_vecs
@@ -259,11 +229,6 @@ class PCA_COV:
         Returns:
         -----------
         ndarray. shape=(num_samps, num_selected_vars)
-
-        TODO:
-        - Project the data on the `top_k` PCs (assume PCA has already been performed).
-        - Project this PCA-transformed data back to the original data space
-        - If you normalized, remember to rescale the data projected back to the original data space.
         '''
         proj_vecs = self.e_vecs[:, :top_k]
         self.A_proj = self.pca_project(np.arange(top_k))
