@@ -1,4 +1,4 @@
-# Face-Recognization
+# Facial Recognization using PCA
 ### *Yiheng Su*
 
 In this project, I implemented and perform principal component analysis (PCA) on Iris and a large dataset of celebrity face images (Eigenface algorithm).
