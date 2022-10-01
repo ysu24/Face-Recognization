@@ -8,4 +8,5 @@ In this project, I implemented and perform principal component analysis (PCA) on
 - Implemented a face recognization using PCA.
 
 Here is an example of my PCA facial recognization.
+
 <img width="570" alt="image" src="https://user-images.githubusercontent.com/97004877/193428023-23e8a3d8-9dd4-47cc-a6ec-3694e9b39c32.png">
